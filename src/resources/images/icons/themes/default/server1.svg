@@ -1,0 +1,36 @@
+<svg width="820" height="587" xmlns="http://www.w3.org/2000/svg">
+
+ <g>
+  <title>background</title>
+  <rect fill="none" id="canvas_background" height="402" width="582" y="-1" x="-1"/>
+ </g>
+ <g>
+  <title>Layer 1</title>
+  <rect fill="#9ea6a9" id="svg_1" width="338.318" transform="matrix(4.95489e-14,-1.45364,1.87086,3.84991e-14,386.707,498.202) " height="24.9888" class="fil0"/>
+  <path fill-rule="nonzero" fill="#000000" id="svg_2" d="m380,498l0,-492c0,-3 3,-6 7,-6l46,0c4,0 7,3 7,6l0,492c0,4 -3,7 -7,7l-46,0c-4,0 -7,-3 -7,-7zm13,-485l0,479l34,0l0,-479l-34,0z" class="fil1"/>
+  <rect fill="#5e6b71" id="svg_3" y="6" x="6" width="807" ry="38" rx="33" height="173" class="fil2"/>
+  <path fill-rule="nonzero" fill="#000000" id="svg_4" d="m44,0l732,0c12,0 23,5 31,13c0,0 0,0 1,0c7,8 12,19 12,31l0,97c0,12 -5,23 -13,31l0,0l0,0c-8,8 -19,13 -31,13l-732,0c-12,0 -23,-5 -31,-13c0,0 0,0 0,0c-8,-8 -13,-19 -13,-31l0,-97c0,-12 5,-23 13,-31l0,0l0,0c8,-8 19,-13 31,-13zm732,13l-732,0c-8,0 -16,3 -22,9l0,0c-6,6 -9,14 -9,22l0,97c0,9 3,16 9,22l0,0c6,6 14,10 22,10l732,0c9,0 16,-4 22,-10l0,0c6,-5 9,-13 9,-22l0,-97c0,-8 -3,-16 -9,-22l0,0c-6,-6 -13,-9 -22,-9z" class="fil1"/>
+  <rect fill="#5e6b71" id="svg_5" y="237" x="6" width="807" ry="38" rx="33" height="173" class="fil2"/>
+  <path fill-rule="nonzero" fill="#000000" id="svg_6" d="m44,230l732,0c12,0 23,5 31,13c0,0 0,0 1,1c7,7 12,18 12,30l0,97c0,13 -5,24 -13,32l0,0l0,0c-8,8 -19,13 -31,13l-732,0c-12,0 -23,-5 -31,-13c0,0 0,-1 0,-1c-8,-8 -13,-19 -13,-31l0,-97c0,-12 5,-23 13,-31l0,0l0,0c8,-8 19,-13 31,-13zm732,13l-732,0c-8,0 -16,4 -22,9l0,0c-6,6 -9,14 -9,22l0,97c0,9 3,17 9,22l0,1c6,5 14,9 22,9l732,0c9,0 16,-4 22,-9l0,0c6,-6 9,-14 9,-23l0,-97c0,-8 -3,-16 -9,-22l0,0c-6,-5 -13,-9 -22,-9z" class="fil1"/>
+  <rect fill="#9ea6a9" id="svg_7" y="498" x="94" width="632.945" height="46.7507" class="fil0"/>
+  <path fill-rule="nonzero" fill="#000000" id="svg_8" d="m94,492l633,0c3,0 6,3 6,6l0,47c0,3 -3,6 -6,6l-633,0c-4,0 -7,-3 -7,-6l0,-47c0,-3 3,-6 7,-6zm626,13l-620,0l0,34l620,0l0,-34z" class="fil1"/>
+  <rect fill="#fb5151" id="svg_9" y="37" x="57" width="51.2463" height="51.2463" class="fil3"/>
+  <path fill-rule="nonzero" fill="#000000" id="svg_10" d="m57,31l51,0c4,0 6,2 6,6l0,51c0,4 -2,7 -6,7l-51,0c-4,0 -7,-3 -7,-7l0,-51c0,-4 3,-6 7,-6zm45,12l-39,0l0,39l39,0l0,-39z" class="fil1"/>
+  <circle fill="#fb5151" id="svg_11" r="61" cy="520" cx="410" class="fil3"/>
+  <path fill-rule="nonzero" fill="#000000" id="svg_12" d="m410,452c19,0 36,8 48,20c12,12 20,29 20,48c0,18 -8,35 -20,48c-12,12 -29,19 -48,19c-19,0 -35,-7 -48,-19c-12,-13 -19,-30 -19,-48c0,-19 7,-36 19,-48c13,-12 29,-20 48,-20zm39,29c-10,-10 -24,-16 -39,-16c-15,0 -29,6 -39,16c-10,10 -16,24 -16,39c0,15 6,29 16,38c10,10 24,17 39,17c15,0 29,-7 39,-17c10,-9 16,-23 16,-38c0,-15 -6,-29 -16,-39z" class="fil1"/>
+  <rect fill="#90ebbf" id="svg_13" y="37" x="146" width="51.2463" height="51.2463" class="fil4"/>
+  <path fill-rule="nonzero" fill="#000000" id="svg_14" d="m146,31l51,0c4,0 6,2 6,6l0,51c0,4 -2,7 -6,7l-51,0c-4,0 -7,-3 -7,-7l0,-51c0,-4 3,-6 7,-6zm45,12l-39,0l0,39l39,0l0,-39z" class="fil1"/>
+  <rect fill="#fb5151" id="svg_15" y="259" x="57" width="51.2463" height="51.2463" class="fil3"/>
+  <path fill-rule="nonzero" fill="#000000" id="svg_16" d="m57,252l51,0c4,0 6,3 6,7l0,51c0,3 -2,6 -6,6l-51,0c-4,0 -7,-3 -7,-6l0,-51c0,-4 3,-7 7,-7zm45,13l-39,0l0,38l39,0l0,-38z" class="fil1"/>
+  <rect fill="#90ebbf" id="svg_17" y="259" x="146" width="51.2463" height="51.2463" class="fil4"/>
+  <path fill-rule="nonzero" fill="#000000" id="svg_18" d="m146,252l51,0c4,0 6,3 6,7l0,51c0,3 -2,6 -6,6l-51,0c-4,0 -7,-3 -7,-6l0,-51c0,-4 3,-7 7,-7zm45,13l-39,0l0,38l39,0l0,-38z" class="fil1"/>
+  <rect fill="#90ebbf" id="svg_19" y="43" x="493" width="279.614" height="26.8474" class="fil4"/>
+  <path fill-rule="nonzero" fill="#000000" id="svg_20" d="m493,37l279,0c4,0 7,3 7,6l0,27c0,4 -3,7 -7,7l-279,0c-4,0 -7,-3 -7,-7l0,-27c0,-3 3,-6 7,-6zm273,13l-267,0l0,14l267,0l0,-14z" class="fil1"/>
+  <rect fill="#90ebbf" id="svg_21" y="115" x="493" width="279.614" height="26.8474" class="fil4"/>
+  <path fill-rule="nonzero" fill="#000000" id="svg_22" d="m493,109l279,0c4,0 7,3 7,6l0,27c0,4 -3,7 -7,7l-279,0c-4,0 -7,-3 -7,-7l0,-27c0,-3 3,-6 7,-6zm273,13l-267,0l0,14l267,0l0,-14z" class="fil1"/>
+  <rect fill="#90ebbf" id="svg_23" y="273" x="493" width="279.614" height="26.8474" class="fil4"/>
+  <path fill-rule="nonzero" fill="#000000" id="svg_24" d="m493,267l279,0c4,0 7,3 7,6l0,27c0,4 -3,7 -7,7l-279,0c-4,0 -7,-3 -7,-7l0,-27c0,-3 3,-6 7,-6zm273,13l-267,0l0,14l267,0l0,-14z" class="fil1"/>
+  <rect fill="#90ebbf" id="svg_25" y="345" x="493" width="279.614" height="26.8474" class="fil4"/>
+  <path fill-rule="nonzero" fill="#000000" id="svg_26" d="m493,339l279,0c4,0 7,3 7,6l0,27c0,4 -3,7 -7,7l-279,0c-4,0 -7,-3 -7,-7l0,-27c0,-3 3,-6 7,-6zm273,13l-267,0l0,14l267,0l0,-14z" class="fil1"/>
+ </g>
+</svg>

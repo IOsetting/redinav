@@ -1,0 +1,17 @@
+<svg width="587" height="587" xmlns="http://www.w3.org/2000/svg">
+
+ <g>
+  <title>background</title>
+  <rect fill="none" id="canvas_background" height="589" width="589" y="-1" x="-1"/>
+ </g>
+ <g>
+  <title>Layer 1</title>
+  <rect x="-11.465437" y="-62.288256" fill="#ff0000" id="svg_1" width="338.318" transform="matrix(4.95489e-14,-1.45364,1.87086,3.84991e-14,386.707,498.202) " height="24.9888" class="fil0"/>
+  <rect stroke="null" fill="#ff0000" id="svg_3" y="6" x="5.049325" width="577.000641" ry="38" rx="33" height="173" class="fil2"/>
+  <rect stroke="null" fill="#ff0000" id="svg_5" y="237" x="5.604867" width="575.889574" ry="38" rx="33" height="173" class="fil2"/>
+  <rect stroke="null" fill="#ff0000" id="svg_7" y="499.111108" x="9.947006" width="570.538645" height="46.7507" class="fil0"/>
+  <circle fill="#ff0000" id="svg_11" r="61" cy="523.333323" cx="293.549653" class="fil3"/>
+  <rect opacity="0" fill="#90ebbf" id="svg_25" y="345" x="493" width="279.614" height="26.8474" class="fil4"/>
+  <rect id="svg_28" height="1.123611" width="0" y="290.69099" x="-110.793643" stroke-opacity="null" stroke-width="null" stroke="null" fill="#ff0000"/>
+ </g>
+</svg>

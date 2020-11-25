@@ -1,0 +1,116 @@
+#!/bin/bash
+set -e
+# On OSX use coreutils package to fix absense of readlink command
+if [[ $OSTYPE == darwin* ]]; then
+
+  # Check for installed package manager
+  if [ -f /opt/local/bin/port ]; then
+    PKG_MANAGER="macports"
+    sudo port install coreutils || true
+    PATH="/opt/local/libexec/gnubin:$PATH"
+  elif [ -f /usr/local/bin/brew ]; then
+    brew install coreutils || true
+    PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
+    PKG_MANAGER="homebrew"
+  else
+    echo "*** Could not find a required package manager. Please install Macports (recommnded) or Homebrew and try again!"
+    exit 1
+  fi
+
+fi
+
+# Import common functions
+DIR=$(dirname "$(readlink -f "$0")") && REDINAV_DIR=$DIR/../
+. $REDINAV_DIR/build/common_functions
+
+GetOSVersion
+
+if [ "$1" == "openssl" ]; then
+    print_title "Build only OpenSSL"
+    build_openssl
+    exit 0
+fi
+
+if [ "$1" == "openssl101" ]; then
+    print_title "Build only OpenSSL 1.0.*"
+    build_openssl101
+    exit 0
+fi
+
+if [ "$1" == "libssh2" ]; then
+    print_title "Build only libssh2"
+    build_libssh2
+    exit 0
+fi
+
+
+if [ "$os_VENDOR" == "Ubuntu" ] || [ "$os_VENDOR" == "LinuxMint" ]; then
+    ubuntu_ver=${os_RELEASE:0:2}
+    print_title "Build REDINAV on $os_VENDOR: $ubuntu_ver"
+
+    if [ "$os_VENDOR" == "Ubuntu" ] && [ "$ubuntu_ver" -lt 16 ]; then
+        echo "RediNav only supports Ubuntu >= 16"
+        exit 1
+    fi
+    
+    if [ "$os_VENDOR" == "LinuxMint" ] && [ "$ubuntu_ver" -lt 17 ]; then
+        echo "RediNav only supports linux mint >=17."
+        exit 1
+    fi
+    
+    if [ "$os_VENDOR" == "LinuxMint" ] && [ "$ubuntu_ver" == "17" ]; then
+    	ubuntu_ver="14"
+    elif [ "$os_VENDOR" == "LinuxMint" ] && [ "$ubuntu_ver" == "18" ]; then
+    	ubuntu_ver="16"
+    fi  
+
+    print_title "Check dependencies (headers)"
+    sudo apt-get install automake libtool libssl-dev g++ libgl1-mesa-dev zlib1g-dev cmake -y
+
+    build_openssl
+    build_openssl101
+    build_libssh2
+    print_qt_creator_message
+
+elif [ "$os_VENDOR" == "Fedora" ] || [[ "$os_VENDOR" == "CentOS" ]]; then
+    print_title "Build RediNav on $os_VENDOR: $os_RELEASE"
+
+    print_title "Check dependencies"
+    sudo yum install libssh2 libssh2-devel gcc gcc-c++ libstdc++-static git cmake rsync redhat-rpm-config -y
+
+    if [[ $? == 1 && "$os_VENDOR" == "CentOS" ]]; then
+        # Some of the deps might need to come from Epel, so output a nice message
+        print_title "Not all dependencies were found. Ensure you have the epel repo installed and enabled."
+        exit
+    fi
+
+    build_openssl
+    build_openssl101
+    build_libssh2
+    print_qt_creator_message
+
+elif [ "$os_VENDOR" == "openSUSE" ]; then
+    print_title "Check dependencies"
+    sudo zypper install -y libopenssl-devel libssh2-devel libX11-devel gcc gcc-c++ libstdc++-devel automake cmake
+
+    build_openssl
+    build_openssl101
+    build_libssh2
+    print_qt_creator_message
+
+
+elif [[ $OSTYPE == darwin* ]]; then
+    cd $DEPS_DIR
+    if [ "$PKG_MANAGER" == "macports" ]; then
+        sudo port install libssh2 || true
+        sudo port install openssl || true
+        sudo port install coreutils || true
+        export OPENSSL_ROOT_DIR=/usr/local/opt/openssl/
+    else
+        brew upgrade openssl || brew install openssl || true
+        export OPENSSL_ROOT_DIR=/usr/local/opt/openssl/
+        pushd $DEPS_DIR/qsshclient && bash configure && popd
+    fi
+else
+    echo "Your operational system is not supported!"
+fi

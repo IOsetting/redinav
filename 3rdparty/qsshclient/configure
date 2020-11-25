@@ -1,0 +1,25 @@
+#!/usr/bin/env bash
+
+# On OSX use coreutils package to fix absense of readlink command
+if [[ $OSTYPE == darwin* ]]; then
+  brew install coreutils cmake openssl || true
+  export OPENSSL_ROOT_DIR=/usr/local/opt/openssl/ 
+  PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
+fi
+
+DIR=$(dirname "$(readlink -f "$0")")
+
+function build_libssh2 {
+    LIBSSH2_PATH=$DIR/3rdparty/libssh2
+
+    if [ ! -f $LIBSSH2_PATH/bin/src/libssh2.a ]; then
+        cd $LIBSSH2_PATH
+        rm -fR ./bin || true
+        mkdir bin
+        cd bin
+        cmake -DCRYPTO_BACKEND=OpenSSL -DENABLE_ZLIB_COMPRESSION=ON ..
+        cmake --build .
+    fi
+}
+
+build_libssh2

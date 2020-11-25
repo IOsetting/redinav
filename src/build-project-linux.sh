@@ -16,7 +16,7 @@
 
 
 # You can adjust the value according to your locally installe Qt version
-QT_BASE_DIR=$HOME/Qt/5.11.1/gcc_64
+QT_BASE_DIR=/opt/qt/Qt5.14.2/5.14.2/gcc_64
 
 
 ################## DO NOT CHANGE BELOW

@@ -1,0 +1,7 @@
+# eclipse project file
+.cproject
+.project
+
+# User file
+*.pro.user
+

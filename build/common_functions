@@ -5,8 +5,8 @@
 # ================
 
 ### 1_2_3 === 1.2.3
-OPENSSL_BRANCH=OpenSSL_1_1_0-stable
-OPENSSL_VERSION=1.1.0
+OPENSSL_BRANCH=OpenSSL_1_1_1-stable
+OPENSSL_VERSION=1.1.1
 
 ## ## ## ## ####################################3
 

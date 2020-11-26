@@ -3,31 +3,22 @@
 
 # RDM Functions
 # ================
-
-### 1_2_3 === 1.2.3
-OPENSSL_BRANCH=OpenSSL_1_1_1-stable
-OPENSSL_VERSION=1.1.1
-
-## ## ## ## ####################################3
-
 DEPS_DIR=$REDINAV_DIR/3rdparty/
 
 function build_openssl {
-    print_title "Building (static) OpenSSL version ${OPENSSL_VERSION}"
-    cd $DEPS_DIR
-    rm -fR ./openssl || true
-    git clone https://github.com/openssl/openssl.git openssl -b $OPENSSL_BRANCH --single-branch || true
-    cd openssl
-    ./config --prefix=$DEPS_DIR/openssl/build --openssldir=$DEPS_DIR/openssl/build/ssl -no-shared
+    print_title "Building (static) OpenSSL"
+    cd $REDINAV_DIR
+    git submodule update --init 3rdparty/openssl
+    cd 3rdparty/openssl
+    ./config --prefix=$REDINAV_DIR/3rdparty/openssl/build --openssldir=$REDINAV_DIR/3rdparty/openssl/build/ssl -no-shared
     make -j4 && make install
 }
 
 function build_libssh2 {
-    print_title "Building (static) libssh2, latest"
-    cd $DEPS_DIR
-    rm -fR ./libssh2 || true
-    git clone https://github.com/libssh2/libssh2.git libssh2 || true
-    cd libssh2
+    print_title "Building (static) libssh2"
+    cd $REDINAV_DIR
+    git submodule update --init 3rdparty/libssh2
+    cd 3rdparty/libssh2
     rm -fR ./bin || true
     mkdir bin
     cd bin
@@ -36,26 +27,20 @@ function build_libssh2 {
         -DBUILD_EXAMPLES:BOOL=OFF  \
         -DCRYPTO_BACKEND=OpenSSL \
         -DENABLE_ZLIB_COMPRESSION=ON \
-        -DOPENSSL_ROOT_DIR=$DEPS_DIR/openssl/build \
-        -DOPENSSL_LIBRARIES=$DEPS_DIR/openssl/build/lib \
-        -DOPENSSL_INCLUDE_DIR=$DEPS_DIR/openssl/build/include/openssl \
+        -DOPENSSL_ROOT_DIR=$REDINAV_DIR/3rdparty/openssl/build \
+        -DOPENSSL_LIBRARIES=$REDINAV_DIR/3rdparty/openssl/build/lib \
+        -DOPENSSL_INCLUDE_DIR=$REDINAV_DIR/3rdparty/openssl/build/include/openssl \
         ..
-    #cmake -DBUILD_TESTING:BOOL=OFF -DBUILD_EXAMPLES:BOOL=OFF  -DCRYPTO_BACKEND=OpenSSL -DENABLE_ZLIB_COMPRESSION=ON -DOPENSSL_ROOT_DIR=$DEPS_DIR/openssl/build -DOPENSSL_LIBRARIES=$DEPS_DIR/openssl/build/lib -DOPENSSL_INCLUDE_DIR=$DEPS_DIR/openssl/build/include ..
     cmake --build .
-    make DESTDIR=$DEPS_DIR/libssh2/build install
+    make DESTDIR=$REDINAV_DIR/3rdparty/libssh2/build install
     # DO NOT BUILD libssh2 from qsshclient
     # pushd $DEPS_DIR/qredisclient/3rdparty/qsshclient && bash configure && popd
 }
 
-function print_line {
-    echo "===================================================================="
-}
-
-
 function print_title {
-    print_line
+    echo "===================================================================="
     echo ${1}
-    print_line
+    echo "===================================================================="
 }
 
 function is_ppa_installed {

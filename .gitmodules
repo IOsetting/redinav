@@ -1,0 +1,6 @@
+[submodule "3rdparty/openssl"]
+	path = 3rdparty/openssl
+	url = https://github.com/openssl/openssl.git
+[submodule "3rdparty/libssh2"]
+	path = 3rdparty/libssh2
+	url = https://github.com/libssh2/libssh2.git

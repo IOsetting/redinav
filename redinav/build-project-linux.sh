@@ -83,14 +83,16 @@ REDINAV_VERSION=$(sed -n '/REDINAV_VERSION/p' modules/version.h| awk '{print $3}
 
 
 if [ ! -d "$QT_BASE_DIR" ]; then
-    echo "Qt v5.11.1 installation not found in $QT_BASE_DIR! Visit https://www.qt.io/download and install Open Source packages"
+    echo "Qt installation not found in $QT_BASE_DIR"
     exit 1
 fi
 
 QTDIR=$QT_BASE_DIR
 PATH=$QT_BASE_DIR/bin:$PATH
 LD_LIBRARY_PATH=$QT_BASE_DIR/lib/:$QT_BASE_DIR/lib:$LD_LIBRARY_PATH
-REDINAV_BASE_DIR=$PWD/..
+
+DIR=$(dirname "$(readlink -f "$0")")
+REDINAV_BASE_DIR=$DIR/..
 SRC_DIR=$REDINAV_BASE_DIR/redinav
 
 cd $SRC_DIR

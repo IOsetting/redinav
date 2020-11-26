@@ -20,7 +20,7 @@ if [[ $OSTYPE == darwin* ]]; then
 fi
 
 # Import common functions
-DIR=$(dirname "$(readlink -f "$0")") && REDINAV_DIR=$DIR/../
+DIR=$(dirname "$(readlink -f "$0")") && REDINAV_DIR=$DIR/..
 . $REDINAV_DIR/build/common_functions
 
 GetOSVersion
@@ -58,8 +58,8 @@ if [ "$os_VENDOR" == "Ubuntu" ] || [ "$os_VENDOR" == "LinuxMint" ]; then
     	ubuntu_ver="16"
     fi  
 
-    print_title "Check dependencies (headers)"
-    sudo apt-get install automake libtool libssl-dev g++ libgl1-mesa-dev zlib1g-dev cmake -y
+    #print_title "Check dependencies (headers)"
+    #sudo apt-get install automake libtool libssl-dev g++ libgl1-mesa-dev zlib1g-dev cmake -y
 
     build_openssl
     build_libssh2

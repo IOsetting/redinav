@@ -16,35 +16,36 @@ The original code of this repository was downloaded from [RediNav](https://www.r
 
 Download qt-opensource-linux-x64-5.14.2.run and run it, install all componments except the Android one, in my case I install it in /opt/qt/Qt5.14.2/
 
-**Checkout the code**
-
-```shell
-git clone https://github.com/IOsetting/redinav.git
-```
-Update the QT_BASE_DIR in src/build-project-linux.sh
-```
-# In my case, I set it to
-QT_BASE_DIR=/opt/qt/Qt5.14.2/5.14.2/gcc_64
-```
-
 **Install dependencies**
 
 ```shell
 sudo apt install automake libtool libssl-dev g++ libgl1-mesa-dev zlib1g-dev cmake
 ```
 
-**Compile**
+**Checkout the code and compile dependencies**
 
 ```shell
-# Precompile, this will init submodules and build openssl&libssh2, it might take several minutes
+git clone https://github.com/IOsetting/redinav.git
+cd redinav
 ./redinav/configure
-# Compile
+```
+
+**Compile**
+
+Set the QT_BASE_DIR in src/build-project-linux.sh
+```
+QT_BASE_DIR=/opt/qt/Qt5.14.2/5.14.2/gcc_64
+```
+
+Then compile
+
+```shell
 ./redinav/build-project-linux.sh
 ```
 
 **Run**
 
-The runnable is located at bin/linux/release/redinav, you can run it from terminal.
+The runnable is located at bin/linux/release/redinav.
 
 ## License
 

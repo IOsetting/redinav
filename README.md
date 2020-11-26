@@ -40,7 +40,7 @@ QT_BASE_DIR=/opt/qt/Qt5.14.2/5.14.2/gcc_64
 Then compile
 
 ```shell
-./redinav/build-project-linux.sh
+./redinav/build-project-linux.sh -r -n -p
 ```
 
 **Run**

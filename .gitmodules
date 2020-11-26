@@ -13,3 +13,9 @@
 [submodule "3rdparty/qt-unix-signals"]
 	path = 3rdparty/qt-unix-signals
 	url = https://github.com/sijk/qt-unix-signals.git
+[submodule "3rdparty/qsshclient"]
+	path = 3rdparty/qsshclient
+	url = https://github.com/uglide/qsshclient.git
+[submodule "3rdparty/qredisclient"]
+	path = 3rdparty/qredisclient
+	url = https://github.com/uglide/qredisclient.git

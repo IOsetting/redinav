@@ -10,6 +10,10 @@ function update_submodules {
     git submodule update --init 3rdparty/asyncfuture
     git submodule update --init 3rdparty/easyloggingpp
     git submodule update --init 3rdparty/qt-unix-signals
+    git submodule update --init 3rdparty/qsshclient
+    git submodule update --init 3rdparty/qredisclient
+    cd $REDINAV_DIR/3rdparty/qredisclient
+    git submodule update --init 3rdparty/hiredis
 }
 
 function build_openssl {

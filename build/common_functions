@@ -3,7 +3,14 @@
 
 # RDM Functions
 # ================
-DEPS_DIR=$REDINAV_DIR/3rdparty/
+
+function update_submodules {
+    print_title "Update submodules"
+    cd $REDINAV_DIR
+    git submodule update --init 3rdparty/asyncfuture
+    git submodule update --init 3rdparty/easyloggingpp
+    git submodule update --init 3rdparty/qt-unix-signals
+}
 
 function build_openssl {
     print_title "Building (static) OpenSSL"
@@ -34,7 +41,7 @@ function build_libssh2 {
     cmake --build .
     make DESTDIR=$REDINAV_DIR/3rdparty/libssh2/build install
     # DO NOT BUILD libssh2 from qsshclient
-    # pushd $DEPS_DIR/qredisclient/3rdparty/qsshclient && bash configure && popd
+    # pushd $REDINAV_DIR/3rdparty/qredisclient/3rdparty/qsshclient && bash configure && popd
 }
 
 function print_title {

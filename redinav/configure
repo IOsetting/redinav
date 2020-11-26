@@ -61,6 +61,7 @@ if [ "$os_VENDOR" == "Ubuntu" ] || [ "$os_VENDOR" == "LinuxMint" ]; then
     #print_title "Check dependencies (headers)"
     #sudo apt-get install automake libtool libssl-dev g++ libgl1-mesa-dev zlib1g-dev cmake -y
 
+    update_submodules
     build_openssl
     build_libssh2
     print_qt_creator_message

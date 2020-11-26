@@ -22,16 +22,6 @@ function build_openssl {
     make -j4 && make install
 }
 
-function build_openssl101 {
-    print_title "Building (shared) OpenSSL version 1.0.* (required by Qt libraries)"
-    cd $DEPS_DIR
-    rm -fR ./openssl101 || true
-    git clone https://github.com/openssl/openssl.git openssl101 -b OpenSSL_1_0_2-stable  --single-branch || true
-    cd openssl101
-    ./config --prefix=$DEPS_DIR/openssl101/build --openssldir=$DEPS_DIR/openssl101/build/ssl -shared
-    make -j4 && make install
-}
-
 function build_libssh2 {
     print_title "Building (static) libssh2, latest"
     cd $DEPS_DIR

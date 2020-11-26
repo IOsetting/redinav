@@ -3,7 +3,7 @@
 # A simple, somewhat clumzy, but working script to run qmake and then make the RediNav (Linux)
 #
 #   [] Manually Install Qt 5.11.1 (or other version, but check below QT_BASE_DIR) Open Source in $HOME directory (https://www.qt.io/download)
-#   [] cd src && ./configure
+#   [] cd redinav && ./configure
 #   [] Run THIS script. Options:
 #       -d   Build in 'debug' mode
 #       -r   Build in 'release' mode
@@ -91,7 +91,7 @@ QTDIR=$QT_BASE_DIR
 PATH=$QT_BASE_DIR/bin:$PATH
 LD_LIBRARY_PATH=$QT_BASE_DIR/lib/:$QT_BASE_DIR/lib:$LD_LIBRARY_PATH
 REDINAV_BASE_DIR=$PWD/..
-SRC_DIR=$REDINAV_BASE_DIR/src
+SRC_DIR=$REDINAV_BASE_DIR/redinav
 
 cd $SRC_DIR
 $QT_BASE_DIR/bin/qmake redinav.pro -spec linux-g++ $OPT_CONFIG_BUILD $OPT_CONFIG_LICENSE $OPT_CONFIG_PSMODE

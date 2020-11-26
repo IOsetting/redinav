@@ -31,12 +31,6 @@ if [ "$1" == "openssl" ]; then
     exit 0
 fi
 
-if [ "$1" == "openssl101" ]; then
-    print_title "Build only OpenSSL 1.0.*"
-    build_openssl101
-    exit 0
-fi
-
 if [ "$1" == "libssh2" ]; then
     print_title "Build only libssh2"
     build_libssh2
@@ -68,7 +62,6 @@ if [ "$os_VENDOR" == "Ubuntu" ] || [ "$os_VENDOR" == "LinuxMint" ]; then
     sudo apt-get install automake libtool libssl-dev g++ libgl1-mesa-dev zlib1g-dev cmake -y
 
     build_openssl
-    build_openssl101
     build_libssh2
     print_qt_creator_message
 
@@ -85,7 +78,6 @@ elif [ "$os_VENDOR" == "Fedora" ] || [[ "$os_VENDOR" == "CentOS" ]]; then
     fi
 
     build_openssl
-    build_openssl101
     build_libssh2
     print_qt_creator_message
 
@@ -94,7 +86,6 @@ elif [ "$os_VENDOR" == "openSUSE" ]; then
     sudo zypper install -y libopenssl-devel libssh2-devel libX11-devel gcc gcc-c++ libstdc++-devel automake cmake
 
     build_openssl
-    build_openssl101
     build_libssh2
     print_qt_creator_message
 

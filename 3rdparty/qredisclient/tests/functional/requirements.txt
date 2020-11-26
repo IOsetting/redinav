@@ -1,2 +1,0 @@
-ddt
-redis

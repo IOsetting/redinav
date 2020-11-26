@@ -1,3 +1,0 @@
-[submodule "3rdparty/hiredis"]
-	path = 3rdparty/hiredis
-	url = https://github.com/redis/hiredis.git

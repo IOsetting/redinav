@@ -117,6 +117,11 @@ public:
     QString getDefaultFilter() const;
     void setDefaultFilter(const QString &filter);
 
+    QWeakPointer<RedisClient::Connection> getOwner() const;
+    void setOwner(QWeakPointer<RedisClient::Connection> o);
+
+private:
+    QWeakPointer<RedisClient::Connection> m_owner;
 };
 
 Q_DECLARE_METATYPE(ServerConfig)

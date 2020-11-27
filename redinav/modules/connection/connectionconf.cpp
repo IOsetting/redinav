@@ -13,7 +13,7 @@ ServerConfig::ServerConfig(const QString& host, const QString& auth, const uint 
 ServerConfig::ServerConfig(const RedisClient::ConnectionConfig& other)
 {
     m_parameters = other.getInternalParameters();
-    m_owner = other.getOwner();
+    m_owner = QWeakPointer<RedisClient::Connection>();
     loadSecurityContentItemsFromFile();
 }
 
@@ -301,5 +301,15 @@ QString ServerConfig::generateFilePathFromContent(const QByteArray content, QSha
 bool ServerConfig::isEncrypted()
 {
     return getSshEnabled() || getSslEnabled();
+}
+
+QWeakPointer<RedisClient::Connection> ServerConfig::getOwner() const
+{
+    return m_owner;
+}
+
+void ServerConfig::setOwner(QWeakPointer<RedisClient::Connection> o)
+{
+    m_owner = o;
 }
 

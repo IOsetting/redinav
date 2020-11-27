@@ -198,7 +198,7 @@ QString BaseKey::addRow(const QString& v1, const QString& v2)
 bool BaseKey::keyExists(QSharedPointer<RedisClient::Connection> connection, int& dbNumber, QString& keyName)
 {
     RedisClient::Response result = connection->commandSync({ "EXISTS", keyName.toUtf8() }, dbNumber);
-    return result.getValue().toInt() > 0;
+    return result.value().toInt() > 0;
 }
 
 QJsonObject BaseKey::getKeyAsJsonObject()

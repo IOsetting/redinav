@@ -78,7 +78,7 @@ void ZsetKey::loadRawKeyData(const int& page, const QString& search)
         try {
             int start = (m_currentPage - 1) * m_pageSize;
             result = m_connection->commandSync({ "ZRANGE", m_keyFullPath, QByteArray::number(start), QByteArray::number(start + m_pageSize - 1), "WITHSCORES" }, m_dbNumber);
-            m_rows = result.getValue().toList();
+            m_rows = result.value().toList();
             m_pairList = convertToListOfPairs(m_rows);
             buildListData(0, Qt::AscendingOrder);
             unlock();
@@ -101,8 +101,8 @@ void ZsetKey::loadRowsCount()
 
     try {
         result = m_connection->commandSync({ "ZCARD", m_keyFullPath }, m_dbNumber);
-        if (result.getType() == RedisClient::Response::Integer) {
-            m_rowsCount = result.getValue().toUInt();
+        if (result.type() == RedisClient::Response::Integer) {
+            m_rowsCount = result.value().toUInt();
         }
         else {
             throw RedisClient::Connection::Exception("Invalid response type");
@@ -308,7 +308,7 @@ bool ZsetKey::memberExists(const QByteArray& memberValue)
         if (result.isErrorMessage()) {
             return false;
         }
-        return result.getValue().isValid();
+        return result.value().isValid();
     } catch (const RedisClient::Connection::Exception& e) {
         return false;
     }
@@ -318,7 +318,7 @@ bool ZsetKey::memberExists(const QByteArray& memberValue)
 QJsonObject ZsetKey::getKeyAsJsonObject()
 {
     RedisClient::Response response = m_connection->commandSync({ "ZRANGE", m_keyFullPath, "0", "-1", "WITHSCORES" }, m_dbNumber);
-    QVariantList data = response.getValue().toList();
+    QVariantList data = response.value().toList();
     QList<QPair<QByteArray, QByteArray>> pairList = convertToListOfPairs(data);
 
     QJsonArray value = QJsonArray();

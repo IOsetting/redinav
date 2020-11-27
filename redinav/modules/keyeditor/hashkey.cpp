@@ -187,7 +187,7 @@ bool HashKey::fieldExists(const QByteArray& fieldName)
         if (result.isErrorMessage()) {
             return false;
         }
-        return result.getValue().toInt() > 0;
+        return result.value().toInt() > 0;
 
     } catch (const RedisClient::Connection::Exception& e) {
         return false;
@@ -203,7 +203,7 @@ QJsonObject HashKey::getKeyAsJsonObject()
     if (response.isErrorMessage())
         return QJsonObject();
 
-    QVariantList data = response.getValue().toList();
+    QVariantList data = response.value().toList();
 
     QList<QPair<QByteArray, QByteArray>> pairList = convertToListOfPairs(data);
 

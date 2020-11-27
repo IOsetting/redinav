@@ -59,8 +59,8 @@ void SetKey::loadRowsCount()
 
     try {
         result = m_connection->commandSync({ "SCARD", m_keyFullPath }, m_dbNumber);
-        if (result.getType() == RedisClient::Response::Integer) {
-            m_rowsCount = result.getValue().toUInt();
+        if (result.type() == RedisClient::Response::Integer) {
+            m_rowsCount = result.value().toUInt();
         }
         else {
             LOG(ERROR) << "Invalid response type";
@@ -210,7 +210,7 @@ bool SetKey::memberExists(const QByteArray& memberValue)
             return false;
         }
 
-        return result.getValue().toInt() > 0;
+        return result.value().toInt() > 0;
     } catch (const RedisClient::Connection::Exception& e) {
         return false;
     }
@@ -221,7 +221,7 @@ QJsonObject SetKey::getKeyAsJsonObject()
     QJsonObject keyData = QJsonObject();
 
     RedisClient::Response response = m_connection->commandSync({ "SMEMBERS", m_keyFullPath }, m_dbNumber);
-    QJsonArray data = response.getValue().toJsonArray();
+    QJsonArray data = response.value().toJsonArray();
 
     keyData.insert("type", "set");
     keyData.insert("value", data);

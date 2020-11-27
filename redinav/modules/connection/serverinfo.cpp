@@ -29,7 +29,7 @@ ServerInfo::ServerInfo(QObject *parent) :
                 emit error(QObject::tr("Cannot update server info. Error: %0").arg(err));
                 return;
             }
-            m_serverData = RedisClient::ServerInfo::fromString(r.getValue().toString()).parsed.toVariantMap();
+            m_serverData = RedisClient::ServerInfo::fromString(r.value().toString()).parsed.toVariantMap();
             emit serverDataChanged();
         });
 
@@ -42,7 +42,7 @@ ServerInfo::ServerInfo(QObject *parent) :
                     emit error(QObject::tr("Cannot update server info. Error: %0").arg(err));
                     return;
                 }
-                m_rawData = r.getValue().toString();
+                m_rawData = r.value().toString();
                 m_clientsList = toJsonArray(m_rawData);
                 emit clientsListChanged();
             });

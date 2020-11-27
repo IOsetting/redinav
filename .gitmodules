@@ -1,6 +1,3 @@
-[submodule "3rdparty/asyncfuture"]
-	path = 3rdparty/asyncfuture
-	url = https://github.com/benlau/asyncfuture.git
 [submodule "3rdparty/easyloggingpp"]
 	path = 3rdparty/easyloggingpp
 	url = https://github.com/amrayn/easyloggingpp.git

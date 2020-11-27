@@ -13,9 +13,6 @@ INCLUDEPATH += $$PWD/easyloggingpp/src
 HEADERS += $$PWD/easyloggingpp/src/easylogging++.h
 SOURCES += $$PWD/easyloggingpp/src/easylogging++.cc
 
-# Asyncfuture
-include($$PWD/asyncfuture/asyncfuture.pri)
-
 win32-msvc* {
     message("Configure 3rdparty for MSVC")
     QMAKE_CXXFLAGS += /MP

@@ -17,10 +17,10 @@ void StringKey::loadRawKeyData()
     try {
         m_connection->command({ "GET", m_keyFullPath }, this,
             [this](RedisClient::Response resp, QString e) {
-                if (resp.getType() != RedisClient::Response::Bulk || !e.isEmpty()) {
+                if (resp.type() != RedisClient::Response::String || !e.isEmpty()) {
                     throw Exception(QObject::tr("Cannot load value"));
                 }
-                m_value = resp.getValue().toByteArray();
+                m_value = resp.value().toByteArray();
                 emit valueChanged();
             },
             m_dbNumber);
@@ -75,7 +75,7 @@ QJsonObject StringKey::getKeyAsJsonObject()
     QJsonObject keyData = QJsonObject();
 
     RedisClient::Response response = m_connection->commandSync({ "GET", m_keyFullPath }, m_dbNumber);
-    QString data = response.getValue().toString();
+    QString data = response.value().toString();
 
     keyData.insert("type", "string");
     keyData.insert("value", data);

@@ -90,7 +90,7 @@ bool Terminal::execCmd(const QString &input, const bool skipHistory)
                     emit responseTaken(err);
                     return;
                 }
-                QVariant respValue = result.getValue();
+                QVariant respValue = result.value();
                 QString out = QString("channel message>\n%1\n").arg(RedisClient::Response::valueToHumanReadString(respValue));
                 emit responseTaken(out);
             });
@@ -103,7 +103,7 @@ bool Terminal::execCmd(const QString &input, const bool skipHistory)
             RedisClient::Response resp;
             resp = m_connection->commandSync(command);
 
-            QVariant respValue = resp.getValue();
+            QVariant respValue = resp.value();
             QString out = QString("command > %1\n%2\n").arg(QString(input)).arg(RedisClient::Response::valueToHumanReadString(respValue));
             emit responseTaken(out);
 
@@ -204,7 +204,7 @@ void Terminal::execLua(const QString content, QString params)
         command.push_front("eval");
 
         RedisClient::Response resp = m_connection->commandSync(command, workingDb());
-        QVariant respValue = resp.getValue();
+        QVariant respValue = resp.value();
         QString out = QString("command > eval <script> %1\n%2\n").arg(QString(paramsList.join(" "))).arg(RedisClient::Response::valueToHumanReadString(respValue));
         emit responseTaken(out);
 
@@ -294,7 +294,7 @@ int Terminal::getServerDatabasesCount()
     int result = 0;
     if (!resp.isErrorMessage())
     {
-        QList<QVariant> list = resp.getValue().toList();
+        QList<QVariant> list = resp.value().toList();
         result = 1;
         if (!list.isEmpty())
         {

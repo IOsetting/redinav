@@ -63,7 +63,7 @@ void ListKey::loadRawKeyData(const int& page, const QString& search)
         while (keepRunning) {
             start = (cursorPage - 1) * chunk;
             result = m_connection->commandSync({ "LRANGE", m_keyFullPath, QByteArray::number(start), QByteArray::number(start + chunk - 1) }, m_dbNumber);
-            pageRows = result.getValue().toList();
+            pageRows = result.value().toList();
             for (i = 0; i < pageRows.count(); i++) {
                 // Search and add only members having the search string
                 member = pageRows.at(i);
@@ -97,8 +97,8 @@ void ListKey::loadRawKeyData(const int& page, const QString& search)
                     int memberIndex;
 
                     bool failed = false;
-                    if (result.getType() != RedisClient::Response::MultiBulk) {
-                        LOG(ERROR) << "Unexpected response type: " << result.getType() << " (expected: " << RedisClient::Response::Bulk << ")";
+                    if (result.type() != RedisClient::Response::Array) {
+                        LOG(ERROR) << "Unexpected response type: " << result.type() << " (expected: " << RedisClient::Response::Array << ")";
                         failed = true;
                     }
                     if (!err.isEmpty()) {
@@ -113,7 +113,7 @@ void ListKey::loadRawKeyData(const int& page, const QString& search)
                         return;
                     }
 
-                    QList<QVariant> tmpList = result.getValue().toList();
+                    QList<QVariant> tmpList = result.value().toList();
 
                     for (int i = 0; i < tmpList.count(); i++) {
                         memberIndex = start + i;
@@ -144,8 +144,8 @@ void ListKey::loadRowsCount()
 
     try {
         result = m_connection->commandSync({ "LLEN", m_keyFullPath }, m_dbNumber);
-        if (result.getType() == RedisClient::Response::Integer) {
-            m_rowsCount = result.getValue().toUInt();
+        if (result.type() == RedisClient::Response::Integer) {
+            m_rowsCount = result.value().toUInt();
         }
         else {
             LOG(ERROR) << "Invalid response type";
@@ -243,7 +243,7 @@ bool ListKey::isActualPositionChanged(int row, QByteArray currentValue)
         return true;
     }
 
-    QVariantList currentState = result.getValue().toList();
+    QVariantList currentState = result.value().toList();
 
     return currentState.size() != 1 || currentState[0].toByteArray() != QString(currentValue);
 }
@@ -320,7 +320,7 @@ QJsonObject ListKey::getKeyAsJsonObject()
     QJsonObject keyData = QJsonObject();
 
     RedisClient::Response response = m_connection->commandSync({ "LRANGE", m_keyFullPath, "0", "-1" }, m_dbNumber);
-    QJsonArray data = response.getValue().toJsonArray();
+    QJsonArray data = response.value().toJsonArray();
 
     keyData.insert("type", "list");
     keyData.insert("value", data);

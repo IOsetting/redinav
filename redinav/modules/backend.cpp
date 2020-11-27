@@ -436,7 +436,7 @@ void Backend::getDatabases(QSharedPointer<RedisClient::Connection> connection,
         int dbNumber = (availableDatabeses.size() == 0) ? 0 : availableDatabeses.lastKey() + 1;
 
         while (true) {
-            scanningResp = connection->commandSync("select", QString::number(dbNumber));
+            scanningResp = connection->commandSync({"select", QString::number(dbNumber).toLatin1()});
             if (!scanningResp.isOkMessage()) {
                 break;
             }
@@ -803,7 +803,7 @@ bool Backend::keyExists(QSharedPointer<RedisClient::Connection> connection,
     int dbNumber, QString keyName)
 {
     RedisClient::Response result = connection->commandSync({ "EXISTS", keyName.toUtf8() }, dbNumber);
-    return result.getValue().toInt() > 0;
+    return result.value().toInt() > 0;
 }
 
 QString Backend::renameKey(QSharedPointer<RedisClient::Connection> connection,
@@ -973,7 +973,7 @@ QString Backend::getType(QSharedPointer<RedisClient::Connection> connection, int
     if (result.isErrorMessage()) {
         return "";
     }
-    return result.getValue().toString();
+    return result.value().toString();
 
 }
 
@@ -1206,9 +1206,9 @@ void Backend::dumpKeysToJsonFileByKeys(QSharedPointer<RedisClient::Connection> c
                 auto key = BaseKey::factory(connection, dbNumber, keyName, getType(connection, dbNumber, keyName));
                 keyData = key->getKeyAsJsonObject();
                 ttlResponse = connection->commandSync({ "TTL", keyName }, dbNumber);
-                ttl = ttlResponse.getValue().toInt();
+                ttl = ttlResponse.value().toInt();
                 if (ttl != -1) {
-                    keyData.insert("ttl", ttlResponse.getValue().toString());
+                    keyData.insert("ttl", ttlResponse.value().toString());
                 }
                 allKeysObject.insert(keyName, keyData);
             }

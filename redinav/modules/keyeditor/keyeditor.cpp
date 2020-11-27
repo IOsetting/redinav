@@ -58,7 +58,7 @@ void KeyEditor::setDbNumber(int& arg)
 void KeyEditor::loadKeyType()
 {
     RedisClient::Command typeCmd({ "type", m_keyFullPath }, this, [this](RedisClient::Response resp, QString) {
-        m_keyType = resp.getValue().toString();
+        m_keyType = resp.value().toString();
         emit keyEditorReady(); }, m_dbNumber);
 
     try {
@@ -74,7 +74,7 @@ void KeyEditor::loadKeyTtl()
 {
 
     RedisClient::Command ttlCmd({ "TTL", m_keyFullPath }, this, [this](RedisClient::Response resp, QString) {
-        setTtl(resp.getValue().toInt());
+        setTtl(resp.value().toInt());
     }, m_dbNumber);
 
     try {

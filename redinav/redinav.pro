@@ -211,6 +211,7 @@ RESOURCES += \
 
 OTHER_FILES += \
     $$PWD/../LICENSE \
+    $$PWD/../README.md \
     $$PWD/../deploy/mac/* \
     $$PWD/../deploy/linux/* \
     $$PWD/../deploy/linux/docker/* \

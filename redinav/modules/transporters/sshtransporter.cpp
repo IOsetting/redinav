@@ -27,8 +27,6 @@ void RedisClient::SshTransporter::disconnectFromHost()
     if (m_sshClient.isNull())
         return;
 
-    m_loopTimer->stop();
-
     if (m_socket)
         QObject::disconnect(m_socket, 0, this, 0);
 
@@ -65,7 +63,7 @@ bool RedisClient::SshTransporter::connectToHost()
     if (config.isSshPasswordUsed())
         m_sshClient->setPassphrase(config.sshPassword());
 
-    if (config.getSshPrivateKey().size() > 0) {
+    if (config.getSshPrivateKeyPath().size() > 0) {
         QString privateKey = config.getSshPrivateKeyPath();
         QString publicKey = config.getSshPublicKeyPath();
         m_sshClient->setKeyFiles(publicKey, privateKey);
@@ -163,9 +161,6 @@ void RedisClient::SshTransporter::OnSshSocketDestroyed()
 
 void RedisClient::SshTransporter::reconnect()
 {    
-    if (m_loopTimer->isActive())
-        m_loopTimer->stop();
-
     if (m_socket) {
         QObject::disconnect(m_socket, 0, this, 0);
         m_socket->close();
@@ -174,6 +169,5 @@ void RedisClient::SshTransporter::reconnect()
 
     if (openTcpSocket()) {
         resetDbIndex();
-        m_loopTimer->start();
     }
 }

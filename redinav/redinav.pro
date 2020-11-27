@@ -4,38 +4,9 @@
 #
 #-------------------------------------------------
 
-#=====================================================================
-# Notes about building on Windows.
-#
-# We are NOT using MSVC at all! Instead MinGW 32 bit (later maybe 64 bit) is used.
-# The good news is it is part of the normal Qt Framework installation (Section "Tools").
-# As of this writing we are using Qt 5.11.1. Things may change with next version.
-#
-#   1. Install OpenSsl 1.0.2p (but NOT 1.1.x !!) 32-bit version from: https://slproweb.com/products/Win32OpenSSL.html (https://slproweb.com/download/Win32OpenSSL-1_0_2p.exe).
-#      NOTE: In order to run RediNav later, instruct OpenSsl installer to install some libraries in Windows system folder!
-#   2. Install CMAKE system wide from https://cmake.org/download/ (https://cmake.org/files/v3.12/cmake-3.12.4-win64-x64.msi). Adjust PATH.
-#   3. Install Qt Open Source, including MinGW 32bit tool
-#   4. Set MinGW as the build kit for RediNav project in Qt Creator
-#   5. Make sure OS level PATH environment variable contains <Qt-root>\Tools\mingw530_32\bin (check the MinGW version)
-#   6. Pull all RediNav submodules, namely, qsshclient/3rdparty/libssh2
-#   7. Building libssh2
-#       cd <redinav-root>/build
-#       mkdir libssh2
-#       cd libssh2
-#       cmake -G "MinGW Makefiles" ..\..\3rdparty\qsshclient\3rdparty\libssh2
-#       cmake --build .
-#   8. At this point you should have this static librray available: <redinav-root>/build/libssh2/src/libssh2.a
-#   9. Build project in Qt
-#   10. You may need MSVCR 1.20 (MSVS 2013). No need to install MS Visual C. Just install redistributables
-#           x64: http://download.microsoft.com/download/0/5/6/056dcda9-d667-4e27-8001-8a0c6971d6b1/vcredist_x64.exe
-#           x32: http://download.microsoft.com/download/0/5/6/056dcda9-d667-4e27-8001-8a0c6971d6b1/vcredist_x86.exe
-#
-#=====================================================================
-
 DEFINES += APPLICATION_NAME=\\\"redinav\\\"
 DEFINES += ORG_NAME=\\\"scavaline.com\\\"
 DEFINES += ORG_DOMAIN=\\\"scavaline.com\\\"
-
 
 #------------------------ ---------------------- --------------------- -------------
 
@@ -103,28 +74,10 @@ INCLUDEPATH += $$PWD/modules/transporters/
 THIRDPARTYDIR = $$PWD/../3rdparty/
 include($$THIRDPARTYDIR/3rdparty.pri)
 
-# License management related (Windows and Linux only)
-if (exists($$PWD/../deploy/license/redinav_license.pri):CONFIG(license))  {
-    include($$PWD/../deploy/license/redinav_license.pri)
-    DEFINES -= SKIP_LIMITER
-    DEFINES -= SKIP_LICENSE_CHECK
-    message("Building with License management support")
-}
-else:!exists($$PWD/../deploy/license/redinav_license.pri):CONFIG(license)  {
-    message("---------------------------------------------------------------------")
-    message("License support requested but related custom definitions are missing")
-    message("----------------- PLEASE FIX THIS BEFORE BUILD ---------------------")
-    return()
-}
-else {
-    DEFINES += LICENSE_STORE_CODE=\\\"dummy\\\"
-    DEFINES += LICENSE_PRODUCT_SKU=\\\"dummy\\\"
-    DEFINES += LICENSE_API_BASE_URL=\\\"https://ahoy.dummy.com/\\\"
-    message("Building with NO license management support")
-}
-
-
-
+DEFINES += LICENSE_STORE_CODE=\\\"dummy\\\"
+DEFINES += LICENSE_PRODUCT_SKU=\\\"dummy\\\"
+DEFINES += LICENSE_API_BASE_URL=\\\"https://ahoy.dummy.com/\\\"
+message("Building with NO license management support")
 
 win32 {
     message("Building for win32")
@@ -220,20 +173,7 @@ unix:!macx { # ubuntu & debian
         DEFINES+=QT_NO_DEBUG_OUTPUT
     }
 
-
-    PRE_TARGETDEPS += $$PWD/../3rdparty/openssl/build/lib/libcrypto.a
-    PRE_TARGETDEPS += $$PWD/../3rdparty/openssl/build/lib/libssl.a
-    PRE_TARGETDEPS += $$PWD/../3rdparty/libssh2/build/usr/local/lib/libssh2.a
-
-
-    # OpenSSL 1.1.x (static). Built from source (see common_functions::build_openssl). Required by libssh2
-    # libssh2 (static). Built from source (see common_functions::build_libssh2). Required by qsshclient
-    # NOTE: qredisclient/qsshclient/libssh2 is NOT built nor used at all!
-    INCLUDEPATH += $$PWD/../3rdparty/openssl/build/include/openssl
-    INCLUDEPATH += $$PWD/../3rdparty/libssh2/build/usr/local/include
-
-    # ORDER IS IMPORTANT!!!
-    LIBS += -L$$PWD/../3rdparty/openssl/build/lib -L$$PWD/../3rdparty/libssh2/build/usr/local/lib -lssh2 -lz -lssl -lcrypto -ldl
+    LIBS += -lssh2 -lz -lssl -lcrypto -ldl
 
     release: {
         DESTDIR = $$PWD/../bin/linux/release
@@ -246,7 +186,7 @@ unix:!macx { # ubuntu & debian
 
     # Deployment
     target.path = /usr/share/redinav/bin
-    target.files = $$DESTDIR/$$TARGET $$PWD/resources/qt.conf  $$PWD/resources/redinav.png $$PWD/resources/redinav.sh
+    target.files = $$DESTDIR/$$TARGET $$PWD/resources/qt.conf $$PWD/resources/images/redinav.png $$PWD/resources/redinav.sh
     INSTALLS += target
 
     data.path = /usr/share/redinav/lib
@@ -271,7 +211,6 @@ RESOURCES += \
 
 OTHER_FILES += \
     $$PWD/../LICENSE \
-    $$PWD/../build/common_functions \
     $$PWD/../deploy/mac/* \
     $$PWD/../deploy/linux/* \
     $$PWD/../deploy/linux/docker/* \

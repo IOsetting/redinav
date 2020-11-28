@@ -70,14 +70,12 @@ HEADERS  += \
 
 INCLUDEPATH += $$PWD/modules/transporters/
 
-
 THIRDPARTYDIR = $$PWD/../3rdparty/
 include($$THIRDPARTYDIR/3rdparty.pri)
 
 DEFINES += LICENSE_STORE_CODE=\\\"dummy\\\"
 DEFINES += LICENSE_PRODUCT_SKU=\\\"dummy\\\"
 DEFINES += LICENSE_API_BASE_URL=\\\"https://ahoy.dummy.com/\\\"
-message("Building with NO license management support")
 
 win32 {
     message("Building for win32")
@@ -163,6 +161,7 @@ unix:!macx { # ubuntu & debian
 
     QTPLUGIN += qsvg qsvgicon
     QMAKE_CXXFLAGS += -Wno-sign-compare
+    QMAKE_CXXFLAGS += -DELPP_NO_DEFAULT_LOG_FILE
 
     debug: {
         # For better debugging, lower down the optimization
